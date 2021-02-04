@@ -10,7 +10,8 @@ server.get("/", (req, res) => {
 });
 
 server.use((error, req, res, next) => {
-  res.status(500).json({ message: "Server Failed", error });
+  const statusCode = error.statusCode || 500;
+  res.status(statusCode).json({ message: error.message, stack: error.stack });
 });
 
 module.exports = server;
