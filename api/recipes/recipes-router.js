@@ -51,7 +51,9 @@ function checkID(req, res, next) {
   const { id } = req.params;
   Recipes.getRecipe(id)
     .then((recipe) => {
+      console.log(recipe);
       if (!recipe) {
+        const err = new Error();
         err.message = "Recipe not found";
         err.statusCode = 404;
         next(err);
